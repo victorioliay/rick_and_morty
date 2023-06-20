@@ -33,7 +33,7 @@ function App() {
 
   const onClose = (id) => {
     const charactersFiltered = characters.filter(
-      (character) => character.id !== Number(id)
+      (character) => character.id !== id
     );
     setCharacters(charactersFiltered);
   };
