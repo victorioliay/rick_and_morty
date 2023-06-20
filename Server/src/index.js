@@ -19,5 +19,5 @@ server.use((req, res, next) => {
 server.use("/rickandmorty", router);
 
 server.listen(PORT, () => {
-  console.log("server listening on port " + PORT);
+  console.log(`server listening on port: ${PORT}`);
 });

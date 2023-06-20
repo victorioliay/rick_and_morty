@@ -1,23 +1,22 @@
 const { login } = require("../controllers/login");
 const { getCharById } = require("../controllers/getCharById");
 const { postFav, deleteFav } = require("../controllers/handleFavorites");
-const router = require("express").Router();
+const { Router } = require("express");
 
-router.get("/character/:id", (req, res) => {
-  getCharById(req, res);
-});
+const router = Router();
 
-router.get("/login", (req, res) => {
-  login(req, res);
-});
+router.get("/character/:id", getCharById);
 
-router.post("/fav", (req, res) => {
-  postFav(req, res);
-});
+// esta seria la forma base o simple de hacer las rutas.
+// router.get("/character/:id", (req, res) => {
+//   getCharById(req, res);
+// });
 
-router.delete("/fav/:id", (req, res) => {
-  deleteFav(req, res);
-});
+router.get("/login", login);
+
+router.post("/fav", postFav);
+
+router.delete("/fav/:id", deleteFav);
 
 module.exports = {
   router,
