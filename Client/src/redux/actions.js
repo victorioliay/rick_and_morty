@@ -25,8 +25,6 @@ export const removeFav = (id) => {
     try {
       const { data } = await axios.delete(endpoint);
 
-      if (!data.length) throw Error("No hay favoritos");
-
       return dispatch({
         type: "REMOVE_FAV",
         payload: data,
