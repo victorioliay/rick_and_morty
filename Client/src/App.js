@@ -12,6 +12,7 @@ import Favorites from "./components/Favorites/Favorites";
 
 const email = "victorio@gmail.com";
 const password = "1234tuki";
+const URL = "http://localhost:3001/rickandmorty/login/";
 
 function App() {
   const location = useLocation();
@@ -19,16 +20,18 @@ function App() {
   const [characters, setCharacters] = useState([]);
   const [access, setAccess] = useState(false);
 
-  const onSearch = (id) => {
-    axios(`http://localhost:3001/rickandmorty/character/${id}`)
-      .then((response) => response.data)
-      .then((data) => {
-        if (data.id) {
-          setCharacters((oldChars) => [...oldChars, data]);
-        } else {
-          alert("¡No hay personajes con este ID!");
-        }
-      });
+  const onSearch = async (id) => {
+    try {
+      const { data } = await axios(
+        `http://localhost:3001/rickandmorty/character/${id}`
+      );
+
+      if (data.id) {
+        setCharacters((oldChars) => [...oldChars, data]);
+      }
+    } catch (error) {
+      alert("¡No hay personajes con este ID!");
+    }
   };
 
   const onClose = (id) => {
@@ -38,14 +41,19 @@ function App() {
     setCharacters(charactersFiltered);
   };
 
-  const login = (userData) => {
-    const { email, password } = userData;
-    const URL = "http://localhost:3001/rickandmorty/login/";
-    axios(URL + `?email=${email}&password=${password}`).then(({ data }) => {
+  const login = async (userData) => {
+    try {
+      const { email, password } = userData;
+      const { data } = await axios(
+        URL + `?email=${email}&password=${password}`
+      );
       const { access } = data;
+
       setAccess(data);
       access && navigate("/home");
-    });
+    } catch (error) {
+      console.log(error.message);
+    }
   };
 
   useEffect(() => {
