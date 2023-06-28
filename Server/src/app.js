@@ -1,10 +1,10 @@
 const express = require("express");
-const app = express();
+const server = express();
 const { router } = require("./routes/index");
 
-app.use(express.json());
+server.use(express.json());
 
-app.use((req, res, next) => {
+server.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Credentials", "true");
   res.header(
@@ -15,8 +15,8 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use("/rickandmorty", router);
+server.use("/rickandmorty", router);
 
 module.exports = {
-  app,
+  server,
 };
