@@ -20,7 +20,7 @@ router.delete("/fav/:id", deleteFav);
 // esta seria la forma base o simple de hacer las rutas.
 // router.get("/character/:id", (req, res) => {
 //   getCharById(req, res);
-// });
+// });ok
 
 module.exports = {
   router,
